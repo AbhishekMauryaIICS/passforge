@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PassForge — Password Strength Analyzer &amp; Generator</title>
+<meta name="description" content="PassForge: a 100% client-side password strength analyzer and secure generator. Nothing you type ever leaves your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+
+  <header class="top">
+    <div class="stamp">LOCAL ONLY · NO NETWORK · NO STORAGE</div>
+    <h1>Pass<em>Forge</em></h1>
+    <p class="lede">Test how long a password would really survive, then forge a stronger one. Everything runs in your browser.</p>
+  </header>
+
+  <section class="card" aria-labelledby="analyzeTitle">
+    <h2 id="analyzeTitle"><span>01</span> Analyze</h2>
+    <label class="field" for="pw">Type or paste a password</label>
+    <div class="input-row">
+      <input id="pw" type="password" autocomplete="off" spellcheck="false" placeholder="e.g. Tr0ub4dor&3">
+      <button id="toggle" class="ghost" type="button" aria-pressed="false">Show</button>
+    </div>
+
+    <div class="meter" aria-hidden="true"><div id="bar"></div></div>
+    <div class="verdict-row">
+      <div id="verdict" class="verdict">Waiting for input</div>
+      <div id="entropy" class="mono dim">0 bits</div>
+    </div>
+
+    <div class="grid2">
+      <div class="stat"><div class="k">Estimated crack time</div><div id="crack" class="v">—</div><div class="note">offline attack, 10 billion guesses / sec</div></div>
+      <div class="stat"><div class="k">Length</div><div id="len" class="v">0</div><div class="note">characters</div></div>
+    </div>
+
+    <ul id="checks" class="checks"></ul>
+    <div id="tips" class="tips"></div>
+  </section>
+
+  <section class="card" aria-labelledby="genTitle">
+    <h2 id="genTitle"><span>02</span> Forge</h2>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" role="tab" data-mode="password">Password</button>
+      <button class="tab" role="tab" data-mode="passphrase">Passphrase</button>
+    </div>
+
+    <div class="output-row">
+      <output id="out" class="output mono" aria-live="polite">—</output>
+      <button id="copy" class="solid" type="button">Copy</button>
+      <button id="regen" class="ghost" type="button" aria-label="Generate again">↻</button>
+    </div>
+
+    <div id="passwordOpts">
+      <div class="slider-row">
+        <label for="length">Length</label>
+        <input id="length" type="range" min="8" max="64" value="20">
+        <span id="lengthVal" class="mono">20</span>
+      </div>
+      <div class="opts">
+        <label><input type="checkbox" id="optLower" checked> a–z</label>
+        <label><input type="checkbox" id="optUpper" checked> A–Z</label>
+        <label><input type="checkbox" id="optNum" checked> 0–9</label>
+        <label><input type="checkbox" id="optSym" checked> !@#$</label>
+        <label><input type="checkbox" id="optAmb"> avoid look-alikes (O 0 l 1 I)</label>
+      </div>
+    </div>
+
+    <div id="phraseOpts" hidden>
+      <div class="slider-row">
+        <label for="words">Words</label>
+        <input id="words" type="range" min="3" max="8" value="5">
+        <span id="wordsVal" class="mono">5</span>
+      </div>
+      <div class="opts">
+        <label><input type="checkbox" id="optCap" checked> Capitalize</label>
+        <label><input type="checkbox" id="optDigit" checked> Add a number</label>
+        <label>Separator
+          <select id="sep"><option value="-">-</option><option value=".">.</option><option value="_">_</option><option value=" ">space</option></select>
+        </label>
+      </div>
+    </div>
+
+    <button id="analyzeGen" class="link" type="button">Analyze this one →</button>
+  </section>
+
+  <footer class="foot">
+    Built by <a href="https://github.com/AbhishekMauryaIICS">Abhishek Maurya</a> · Randomness from <span class="mono">crypto.getRandomValues</span> · MIT License
+  </footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
